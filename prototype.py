@@ -66,8 +66,8 @@ def get_topTracksYOUTUBE(current_lastFM_urls):
         for lastFM_urls in item:
             request = requests.get(lastFM_urls)
             soup = BeautifulSoup(request.text, 'html.parser')
-
-            for link in soup.find_all('a'):
+            # go through all links that are YouTube play
+            for link in soup.find_all("a", class_="play-this-track-playlink--youtube"):
                 found_url = link.get('href')
                 if "youtube.com/watch?v=" in str(found_url):
                     # not to copy duplicates
