@@ -17,7 +17,7 @@ $python prototype.py
 ```  
 $python3 prototype.py
 ```
-4. You will be propted to enter an Artist.
+4. You will be prompted to enter an Artist.
 ```
 status :: 200
 Please enter an artist //
