@@ -25,7 +25,7 @@ Please enter an artist //
 5. The program will output:
     - status code of the connection, expect 200 returned
     - array of similar artists (current limit is 20 artists)
-    - array of urls for last.fm top tracks (current limit is 5 tracks)
+    - dictionary of last.fm urls of top tracks per similar artist (current limit is 5 tracks)
   
 ## sources
   - https://www.dataquest.io/blog/last-fm-api-python/
