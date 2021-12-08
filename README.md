@@ -29,7 +29,6 @@ Please enter an artist //
     - status code of the connection, expect 200 returned
     - array of similar artists (current limit is 20 artists)
     - dictionary of last.fm and YouTube urls of top tracks per similar artist (current limit is 5 tracks)
-    - *NOTE :: YouTube url counts are more than 5, need to investigate what it is scraping that is not only limited to a top track video*
   
 ## sources
   - https://www.dataquest.io/blog/last-fm-api-python/
