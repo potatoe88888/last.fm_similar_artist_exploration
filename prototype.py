@@ -1,13 +1,8 @@
-### SOURCES
-# https://www.dataquest.io/blog/last-fm-api-python/
-# https://www.w3resource.com/python-exercises/dictionary/python-data-type-dictionary-exercise-49.php
-# https://stackoverflow.com/questions/44720682/does-the-lastfm-api-provide-youtube-links
-
 import requests
 import json
 
-API_KEY = '12a9ed2e87c6978ad67c7e07792f1622'
-USER_AGENT = 'bayera88888'
+API_KEY = ''
+USER_AGENT = ''
 ARTIST_LIMIT = 20
 TOP_TRACKS_LIMIT = 5
 
