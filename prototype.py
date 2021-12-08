@@ -21,7 +21,7 @@ def lastfm_getData(payload):
 def get_similarArtists(userInput_artist):
     # capture similar artists and urls
     similar_artist_array = []
-    top_tracks_urls = []
+    results_dict = {}
 
     # build out payload -- artist name
     request_sa = lastfm_getData({
@@ -38,14 +38,15 @@ def get_similarArtists(userInput_artist):
         # build out array -- artist name
         similar_artist_array.append(response_name_display)
 
-        # build out array -- urls
-        top_tracks_urls.append(get_topTracks(response_name_display))
+        # build out dictionary
+        results_dict[response_name_display] = get_topTracks(response_name_display)
 
     print("similar_artist_array ::")
     print(similar_artist_array)
     print("\n==============================\n")
-    print("top_tracks_urls ::")
-    print(top_tracks_urls)
+    print("last.fm urls to explore ::")
+    results_JSON = json.dumps(results_dict, indent=4)
+    print(results_JSON)
 
     return None
 
@@ -74,9 +75,6 @@ def jprint(obj):
     text = json.dumps(obj, sort_keys=True, indent=4)
     print(text)
 
-# display all information
-#jprint(r3.json())
-
 def check_connections():
     # check connection set up -- expect '200'
     r = lastfm_getData({
@@ -92,6 +90,7 @@ def main():
     print("status :: " + str(check_connections()))
 
     user_artist = input('Please enter an artist // ')
+    print("\n==============================\n")
 
     get_similarArtists(user_artist)
 
