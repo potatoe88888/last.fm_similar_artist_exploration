@@ -1,5 +1,6 @@
 import requests
 import json
+from bs4 import BeautifulSoup
 
 API_KEY = ''
 USER_AGENT = ''
@@ -17,6 +18,11 @@ def lastfm_getData(payload):
 
     response = requests.get(url, headers=headers, params=payload)
     return response
+
+def jprint(obj):
+    # create a formatted string of the Python JSON object
+    text = json.dumps(obj, indent=4)
+    print(text)
 
 def get_similarArtists(userInput_artist):
     # capture similar artists and urls
@@ -39,18 +45,38 @@ def get_similarArtists(userInput_artist):
         similar_artist_array.append(response_name_display)
 
         # build out dictionary
-        results_dict[response_name_display] = get_topTracks(response_name_display)
+        results_dict[response_name_display] = {'last.fm_urls': [], 'YouTube_urls': []}
+        results_dict[response_name_display]['last.fm_urls'] = [get_topTracksLASTFM(response_name_display)]
+        current_lastFM_urls = results_dict[response_name_display]['last.fm_urls']
+        results_dict[response_name_display]['YouTube_urls'] = [get_topTracksYOUTUBE(current_lastFM_urls)]
 
     print("similar_artist_array ::")
     print(similar_artist_array)
     print("\n==============================\n")
-    print("last.fm urls to explore ::")
-    results_JSON = json.dumps(results_dict, indent=4)
-    print(results_JSON)
+    print("last.fm urls and YouTube urls to explore ::")
+    jprint(results_dict)
 
-    return None
+    return results_dict
 
-def get_topTracks(response_name_display):
+def get_topTracksYOUTUBE(current_lastFM_urls):
+    top_tracks_array = []
+
+    # needed to go two layers deep to reach each url
+    for item in current_lastFM_urls:
+        for lastFM_urls in item:
+            request = requests.get(lastFM_urls)
+            soup = BeautifulSoup(request.text, 'html.parser')
+
+            for link in soup.find_all('a'):
+                found_url = link.get('href')
+                if "youtube.com/watch?v=" in str(found_url):
+                    # not to copy duplicates
+                    if str(found_url) not in top_tracks_array:
+                        top_tracks_array.append(found_url)
+
+    return top_tracks_array
+
+def get_topTracksLASTFM(response_name_display):
     top_tracks_array = []
 
     for index in range(0, TOP_TRACKS_LIMIT):
@@ -69,11 +95,6 @@ def get_topTracks(response_name_display):
         top_tracks_array.append(response_url_display)
 
     return top_tracks_array
-
-def jprint(obj):
-    # create a formatted string of the Python JSON object
-    text = json.dumps(obj, sort_keys=True, indent=4)
-    print(text)
 
 def check_connections():
     # check connection set up -- expect '200'
