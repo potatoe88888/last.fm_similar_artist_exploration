@@ -88,8 +88,12 @@ def check_connections():
 
     return r.status_code
 
-# quick check of set up
-print(check_connections())
+def main():
+    print("status :: " + str(check_connections()))
 
-# example use case
-get_similarArtists("Cold Play")
+    user_artist = input('Please enter an artist // ')
+
+    get_similarArtists(user_artist)
+
+if __name__ == "__main__":
+    main()
