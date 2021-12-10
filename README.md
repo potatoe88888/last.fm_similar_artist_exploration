@@ -3,6 +3,9 @@
 ## important note
 This program will be working while in the terminal, it take a decent amount of time to process, will need to look into why, or maybe figure out how to lower the time of processing.
 
+## microservice -- Python libraries needed
+requests, json, bs4
+
 ## set up -- create last.fm API account
 1. Go to last.fm site and fill out information for generating an API key, [Create_API_account](https://www.last.fm/api/account/create). You don't really need to place a callback URL or an application homepage -- did not utilize features that required these things.
 2. Next screen, assumed everything checked out okay by last.fm, the 'API key' and 'Shared secret' will be given.
