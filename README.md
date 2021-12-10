@@ -3,7 +3,7 @@
 ## important note
 This program will be working while in the terminal, it take a decent amount of time to process, will need to look into why, or maybe figure out how to lower the time of processing.
 
-## microservice -- Python libraries needed
+## Python libraries needed
 requests, json, bs4
 
 ## set up -- create last.fm API account
